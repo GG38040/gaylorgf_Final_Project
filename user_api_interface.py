@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
     print("WELCOME TO MY TWITTER API!!")
 
-    while True:
+     while True:
 
         print("1: To look at the current twitter stream for key words.")
         print("2: To look at the last 10 public tweets from @gaylorIii.")
@@ -75,5 +75,5 @@ if __name__ == '__main__':
         elif user_input == "1":
             user_stream = input(
                 "Please enter a key word to query twitter stream:")
-            stream_listener = Stream_listener(user_stream)
-            stream_listener.stream()
+            listen = stream_listener.Stream_listener(user_input)
+            stream_listener.Stream_listener('dominos').stream(listen)
