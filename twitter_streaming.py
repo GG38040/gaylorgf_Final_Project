@@ -26,6 +26,8 @@ class Stream_listener(tweepy.StreamListener):
         self.__query = query
 
     def on_status(self, status):
+
+        
         if hasattr(status, 'retweeted_status'):
             try:
                 print(status.retweeted_status.extend_tweet['full_text'])
@@ -36,21 +38,22 @@ class Stream_listener(tweepy.StreamListener):
                 print(status.extended_tweet['full_text'])
             except AttributeError:
                 print(status.text)
+        user_input = input("View more tweets from stream? 'q' quit:")
+        if user_input == "q":
+            return False
+        else:
+            return True
+            
 
     def on_error(self, status_code):
         if status_code == 420:
             # returning false in on_error disconnents the stream
             return False
 
-    def stream(self):
+    def stream(self, listener):
         """
         """
-        my_stream = tweepy.Stream(auth=self.api.auth, listener=stream_listener)
+        my_stream = tweepy.Stream(
+            auth=self.api.auth, listener=listener)
         my_stream.filter(track=[self.__query])
 
-
-if __name__ == '__main__':
-
-    # intiate stream and enter track query
-    stream_listener = Stream_listener('dominos')
-    stream_listener.stream()
