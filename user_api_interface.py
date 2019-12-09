@@ -60,20 +60,35 @@ if __name__ == '__main__':
 
     print("WELCOME TO MY TWITTER API!!")
 
-     while True:
+    while True:
 
-        print("1: To look at the current twitter stream for key words.")
+        print("1: To look at the current twitter stream for a key word.")
         print("2: To look at the last 10 public tweets from @gaylorIii.")
         print("3: To get the information on a twitter user.")
         print("4: To search twitter for a topic.")
         print("5: Press to EXIT.")
 
         user_input = input("Enter a choice 1-5:")
+        print('\n')
 
         if user_input == "5":
             quit()
         elif user_input == "1":
             user_stream = input(
-                "Please enter a key word to query twitter stream:")
-            listen = stream_listener.Stream_listener(user_input)
+                "Please enter a key word to query twitter stream:\n")
+            listen = stream_listener.Stream_listener(user_stream)
             stream_listener.Stream_listener('dominos').stream(listen)
+        elif user_input == "2":
+            t = twit_restful.Twit_restful()
+            print(t.get_public_tweets())
+        elif user_input == "3":
+            user_get_user = input("Enter twitter handle of user: example gaylorIii")
+            t = twit_restful.Twit_restful()
+            print(t.get_user(user_get_user))
+        elif user_input == "4":
+            user_get_search = input("Enter topic to search: example python")
+            t = twit_restful.Twit_restful()
+            print(t.search_twitter(user_get_search))
+        
+        print('########################################################\n')
+        print('########################################################\n')
