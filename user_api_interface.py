@@ -10,6 +10,12 @@ import tweepy
 import twitter_streaming
 import twitter_restful_api
 
+import tweepy
+import stream_listener
+import twit_restful
+import auth_info
+
+# Print main application logo ascii art Boston University logo
 print(
     """   ----------------------------------         ----------------------   .---------------------     
      sdhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhs:`      hddhhhhhhhhhhhhhhhhhdd   odhhhhhhhhhhhhhhhhhddd     
@@ -56,10 +62,13 @@ print(
      -:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: """
 )
 
+# start main user application interface 
 if __name__ == '__main__':
+    print('########################################################')
+    print("WELCOME TO GREG'S TWITTER API!!")
+    print('########################################################\n')
 
-    print("WELCOME TO MY TWITTER API!!")
-
+# interactive user interface via user controlled loop
     while True:
 
         print("1: To look at the current twitter stream for a key word.")
@@ -68,6 +77,7 @@ if __name__ == '__main__':
         print("4: To search twitter for a topic.")
         print("5: Press to EXIT.")
 
+        # get user input and check against control flow
         user_input = input("Enter a choice 1-5:")
         print('\n')
 
@@ -75,20 +85,22 @@ if __name__ == '__main__':
             quit()
         elif user_input == "1":
             user_stream = input(
-                "Please enter a key word to query twitter stream:\n")
+                "Please enter a key word to query twitter stream:")
             listen = stream_listener.Stream_listener(user_stream)
-            stream_listener.Stream_listener('dominos').stream(listen)
+            stream_listener.Stream_listener(user_stream).stream(listen)
         elif user_input == "2":
             t = twit_restful.Twit_restful()
             print(t.get_public_tweets())
         elif user_input == "3":
-            user_get_user = input("Enter twitter handle of user: example gaylorIii")
+            user_get_user = input(
+                "Enter twitter handle of user: also prints to file(example gaylorIii)")
+            print('\n')
             t = twit_restful.Twit_restful()
             print(t.get_user(user_get_user))
         elif user_input == "4":
-            user_get_search = input("Enter topic to search: example python")
+            user_get_search = input("Enter topic to search: example 'python':")
             t = twit_restful.Twit_restful()
             print(t.search_twitter(user_get_search))
-        
+
         print('########################################################\n')
         print('########################################################\n')
