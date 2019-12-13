@@ -23,7 +23,7 @@ This project was created to complete the requirements for CS521 at Boston Univer
 I would like to explore sentiment analysis of the twitter stream on future topics.  
 
 Code Style:
-This project utilizes python 3 with pepe8 formating.  
+This project utilizes python 3 with PEP 8 formating.  
 
 Features:
 This api allows the following;
