@@ -12,6 +12,8 @@ import auth_info
 
 class Twit_restful():
     """
+    create class object for twitter restful api methods include
+    get_public_tweets, get_user, and search_twitter.
     """
     # static variables for api
     auth = tweepy.OAuthHandler(auth_info.API_KEY, auth_info.API_SECRET_KEY)
@@ -21,12 +23,14 @@ class Twit_restful():
 
     def __init__(self):
         """
+        construct twitter object
         """
         self.search_user = None
         self.search = None
 
     def __str__(self):
         """
+        return method calls to user
         """
         return('{}'.format(self.get_public_tweets(),
                            '{}'.format(self.get_user(),
@@ -34,6 +38,7 @@ class Twit_restful():
 
     def get_public_tweets(self):
         """
+        returns last 10 public tweets from account associated with auth credentials
         """
         # prints tweets from public timeline
         tweet_text_list = []
@@ -48,15 +53,21 @@ class Twit_restful():
 
     def get_user(self, search_user):
         """
+        accepts name to search on twitter and returns results
         """
         # gets a user prints their screen name and follower count
         user = self.api.get_user(search_user)
         user_search_tuple = ('Follower Count =', str(user.followers_count),
-                             str(user.name), 'is account verified =', str(user.verified))
+                             str(user.name), 'account verified =', str(user.verified), '\n')
+
+        user_file = open("user_file.txt", "a")
+        user_file.write(' '.join(user_search_tuple))
+        user_file.close()
         return ' '.join(user_search_tuple)
 
     def search_twitter(self, search):
         """
+        accepts search and returns latest 3 tweets from twitter
         """
         # search 10 items api.search q="[search]"
         search_results_list = []
@@ -69,8 +80,15 @@ class Twit_restful():
 
 
 if __name__ == '__main__':
+    # unit test for methods in class Twit_restful
+    t = Twit_restful()
 
-    twitter_stuff = Twit_restful()
-    print(twitter_stuff.get_user('gaylorIii'))
-    # print(twitter_stuff.search_twitter('#python'))
-    # print(twitter_stuff.get_public_tweets())
+    search_user = 'gaylorIii'
+
+    assert t.get_user(
+        search_user) != None, ("Error user search {}".format(
+            search_user))
+
+    search = 'python'
+    assert t.search_twitter(
+        search) != None, ("Error on search {}".format(search))
