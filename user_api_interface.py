@@ -9,8 +9,6 @@ Description: Twitter API
 import tweepy
 import twitter_streaming
 import twitter_restful_api
-
-import tweepy
 import stream_listener
 import twit_restful
 import auth_info
